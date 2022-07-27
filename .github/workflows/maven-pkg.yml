@@ -1,7 +1,6 @@
 name: Publish package to GitHub Packages
-on:
-  release:
-    types: [created]
+
+on: [push]
 jobs:
   publish:
     runs-on: ubuntu-latest 
@@ -15,6 +14,6 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Publish package
-        run: mvn --batch-mode deploy
+        run: mvn --update-snapshots --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
